@@ -1,0 +1,192 @@
+{
+    "folders": [
+        {
+            "name": "SentinalOS",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "C_Cpp.default.cStandard": "c17",
+        "C_Cpp.default.cppStandard": "c++17",
+        "C_Cpp.default.includePath": [
+            "${workspaceFolder}/kernel/include",
+            "${workspaceFolder}/userland/include",
+            "${workspaceFolder}/tools/include",
+            "${workspaceFolder}/sysroot/usr/include"
+        ],
+        "C_Cpp.default.defines": [
+            "__KERNEL__",
+            "__SENTINALOS__",
+            "AMD64",
+            "SECURITY_LEVEL=PENTAGON"
+        ],
+        "C_Cpp.default.compilerPath": "${workspaceFolder}/tools/bin/x86_64-sentinalos-gcc",
+        "C_Cpp.default.intelliSenseMode": "gcc-x64",
+        "files.associations": {
+            "*.asm": "asm-intel-x86-generic",
+            "*.s": "asm-intel-x86-generic",
+            "*.h": "c",
+            "*.c": "c",
+            "*.ld": "linkerscript",
+            "*.cfg": "ini",
+            "Makefile*": "makefile",
+            "*.mk": "makefile"
+        },
+        "editor.insertSpaces": false,
+        "editor.tabSize": 8,
+        "editor.detectIndentation": false,
+        "editor.rulers": [80, 120],
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true,
+        "C_Cpp.clang_format_style": "{ BasedOnStyle: LLVM, UseTab: ForIndentation, TabWidth: 8, IndentWidth: 8, ColumnLimit: 80 }",
+        "terminal.integrated.cwd": "${workspaceFolder}",
+        "git.ignoreLimitWarning": true
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": [
+            {
+                "label": "Validate Host System",
+                "type": "shell",
+                "command": "./scripts/validate-host.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Build Toolchain",
+                "type": "shell",
+                "command": "./scripts/build-toolchain.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Build Kernel",
+                "type": "shell",
+                "command": "./scripts/build-kernel.sh",
+                "group": {
+                    "kind": "build",
+                    "isDefault": true
+                },
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+            {
+                "label": "Build Userland",
+                "type": "shell",
+                "command": "./scripts/build-userland.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": [
+                    "$gcc"
+                ]
+            },
+            {
+                "label": "Create ISO",
+                "type": "shell",
+                "command": "./scripts/create-iso.sh",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Test in QEMU",
+                "type": "shell",
+                "command": "./scripts/test-qemu.sh",
+                "group": "test",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            },
+            {
+                "label": "Clean Build",
+                "type": "shell",
+                "command": "make clean",
+                "group": "build",
+                "presentation": {
+                    "echo": true,
+                    "reveal": "always",
+                    "focus": false,
+                    "panel": "shared"
+                },
+                "problemMatcher": []
+            }
+        ]
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Debug Kernel (QEMU)",
+                "type": "cppdbg",
+                "request": "launch",
+                "program": "${workspaceFolder}/build/kernel/sentinalos.elf",
+                "args": [],
+                "stopAtEntry": false,
+                "cwd": "${workspaceFolder}",
+                "environment": [],
+                "externalConsole": false,
+                "MIMode": "gdb",
+                "miDebuggerPath": "/usr/bin/gdb",
+                "miDebuggerServerAddress": "localhost:1234",
+                "setupCommands": [
+                    {
+                        "description": "Enable pretty-printing for gdb",
+                        "text": "-enable-pretty-printing",
+                        "ignoreFailures": true
+                    },
+                    {
+                        "description": "Set architecture to x86-64",
+                        "text": "set architecture i386:x86-64",
+                        "ignoreFailures": true
+                    }
+                ],
+                "preLaunchTask": "Build Kernel"
+            }
+        ]
+    },
+    "extensions": {
+        "recommendations": [
+            "ms-vscode.cpptools-extension-pack",
+            "13xforever.language-x86-64-assembly",
+            "ms-vscode.makefile-tools",
+            "ms-vscode.hexeditor",
+            "vadimcn.vscode-lldb",
+            "ms-python.python",
+            "ms-vscode.cmake-tools",
+            "streetsidesoftware.code-spell-checker"
+        ]
+    }
+}

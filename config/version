@@ -1,0 +1,9 @@
+# Version information for SentinalOS
+# This file is sourced by both shell scripts and included by Makefiles
+
+# For shell scripts
+export SENTINALOS_VERSION="1.0.0-alpha"
+export SENTINALOS_CODENAME="Pentagon"
+export SENTINALOS_BUILD_DATE="$(date -u +%Y-%m-%d)"
+export SENTINALOS_ARCH="x86_64"
+export SENTINALOS_SECURITY_LEVEL="Pentagon"

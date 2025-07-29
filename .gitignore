@@ -1,0 +1,53 @@
+# Build artifacts
+build/
+*.o
+*.a
+*.so
+*.elf
+*.bin
+*.img
+*.iso
+
+# Downloaded sources
+sources/*.tar.*
+sources/*.tgz
+sources/*.zip
+
+# Cross-compilation toolchain
+tools/cross-*
+tools/bin/
+tools/lib/
+tools/libexec/
+tools/share/
+tools/include/
+
+# VS Code settings (keep workspace, ignore user settings)
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
+# System root
+sysroot/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+build.log
+error.log
+
+# Keys and certificates (security sensitive)
+*.key
+*.pem
+*.crt
+*.p12
+secureboot/
+
+# QEMU files
+*.qcow2
+*.vmdk

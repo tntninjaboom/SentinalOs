@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(make:*)",
+      "Bash(ls:*)",
+      "Bash(./scripts/validate-host.sh:*)",
+      "Bash(sudo apt:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)",
+      "Bash(qemu-system-x86_64:*)",
+      "Bash(touch:*)"
+    ],
+    "deny": []
+  }
+}

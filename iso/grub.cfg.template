@@ -1,0 +1,71 @@
+# GRUB Configuration for SentinalOS Pentagon-Level Security
+# Classification: TOP SECRET // SI // NOFORN
+
+set timeout=10
+set default=0
+
+# Pentagon-level security warning
+menuentry "Pentagon Security Warning - Press ESC to Continue" {
+    echo "WARNING: This system contains TOP SECRET information"
+    echo "Unauthorized access is strictly prohibited"
+    echo "All activities are monitored and logged"
+    echo ""
+    echo "Press ESC to continue to boot menu..."
+    read
+}
+
+# Main boot menu
+menuentry "SentinalOS Pentagon v1.0 (Secure Boot)" {
+    echo "Loading Pentagon-level secure kernel..."
+    multiboot2 /boot/sentinal_kernel
+    module2 /boot/initramfs.img
+}
+
+menuentry "SentinalOS Pentagon v1.0 (Recovery Mode)" {
+    echo "Loading recovery mode..."
+    multiboot2 /boot/sentinal_kernel recovery
+    module2 /boot/initramfs.img
+}
+
+menuentry "SentinalOS Pentagon v1.0 (Audit Mode)" {
+    echo "Loading audit mode - all actions logged..."
+    multiboot2 /boot/sentinal_kernel audit
+    module2 /boot/initramfs.img
+}
+
+menuentry "Pentagon Security Tools" {
+    echo "Loading Pentagon-level security utilities..."
+    multiboot2 /boot/sentinal_kernel tools
+    module2 /boot/initramfs.img
+}
+
+menuentry "System Information" {
+    echo "SentinalOS Pentagon-Level Secure Operating System"
+    echo "Version: 1.0.0-Pentagon"
+    echo "Classification: TOP SECRET // SI // NOFORN"
+    echo "Architecture: x86_64"
+    echo ""
+    echo "Security Features:"
+    echo "- Pentagon-level classification system"
+    echo "- Hardware security (SME, SMAP, KASLR)"
+    echo "- Encrypted file system"
+    echo "- Secure boot with UEFI"
+    echo "- Pentesting tools sandbox"
+    echo "- AES-256 encrypted communications"
+    echo ""
+    echo "*** AUTHORIZED PERSONNEL ONLY ***"
+    echo ""
+    echo "Press any key to return to menu..."
+    read
+}
+
+# Security background colors
+set menu_color_normal=white/red
+set menu_color_highlight=black/yellow
+
+# Pentagon-level branding
+echo "=========================================================================="
+echo "                    SENTINAL-OS PENTAGON EDITION                        "
+echo "                 Classification: TOP SECRET // SI                       "
+echo "                     *** AUTHORIZED USE ONLY ***                        "
+echo "=========================================================================="
